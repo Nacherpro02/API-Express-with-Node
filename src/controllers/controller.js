@@ -1,5 +1,4 @@
 const db = require("../db")
-const users = [{id: 0, name: "Iker"},{id: 1, name: "Hadi"}, {id: 2, name: "Artem"}]
 
 const getHelloWorld = (req, res) => {
     res.json("Hello World")
