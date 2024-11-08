@@ -2,23 +2,23 @@ const db = require("../db")
 const users = [{id: 0, name: "Iker"},{id: 1, name: "Hadi"}, {id: 2, name: "Artem"}]
 
 const getHelloWorld = (req, res) => {
-    const message = "Hello World"
-    res.json(message)
-    console.log(`Mensaje ${message} enviado`)
+    res.json("Hello World")
 } 
 
-const getController = (req, res) => {
-    res.json({message: "Mensaje del controlador"})
-}
-
 const getUsers = (req, res) => {
-    res.json(users)
+    const sql = "SELECT * FROM users"
+    db.query(sql, (err, result) => {
+        if (err){
+            console.log(err)
+        }
+        res.json(result)
+    })
 }
 
 const getUserById = (req, res) => {
     const id = parseInt(req.params.id, 10)
     /*res.json(users[id])*/
-    sql = "SELECT * FROM users WHERE id = ?"
+    const sql = "SELECT * FROM users WHERE id = ?"
     db.query(sql, [id], (err, result) => {
         if (err){
             console.log("Ha habido un problema")
@@ -29,9 +29,71 @@ const getUserById = (req, res) => {
     })
 }
 
+const deleteUser = (req, res) =>{
+    const id = parseInt(req.params.id, 10)
+    const sql = "DELETE FROM users WHERE id = ?"
+    db.query(sql, [id], (err, result)=>{
+        if (err){
+            console.log("Ha habido un problema")
+        }
+        res.json("Usuario eliminado")
+    })
+}
+
+const insertUser = (req, res) =>{
+    const { name, edad, profesion, curso } = req.body
+    console.log(req.body)
+    const sql = `INSERT INTO users (name, edad, profesion, curso) VALUES (?, ?, ?, ?)`
+    db.query(sql, [name, edad, profesion, curso], (err, result) => {
+        if (err){
+            console.log(err)
+        }
+        res.json(`Usuario ${name} creado`)
+    })
+}
+
+const updateUser = (req, res) =>{
+    const { name, edad, profesion, curso } = req.body;
+    const updateFields = []
+    const updateValues = []
+
+    if (name){
+        updateFields.push("name = ?")
+        updateValues.push(name)   
+    }
+
+    if (edad){
+        updateFields.push("edad = ?")
+        updateValues.push(edad)   
+    }
+
+    if (profesion){
+        updateFields.push("profesion = ?")
+        updateValues.push(profesion)   
+    }
+
+    if (curso){
+        updateFields.push("curso = ?")
+        updateValues.push(curso)   
+    }
+
+    const id = parseInt(req.params.id,10)
+    updateValues.push(id)
+    
+    const sql = `UPDATE users SET ${updateFields.join(", ")} WHERE id = ?`
+    db.query(sql, updateValues, (err, result) => {
+        if (err){
+            console.log(err)
+        }
+        res.json(`Usuario con id: ${id} actualizado`)
+    })
+}
+
 module.exports = {
-    getController,
     getHelloWorld,
     getUsers,
-    getUserById
-};
+    getUserById,
+    deleteUser,
+    insertUser,
+    updateUser
+}
