@@ -1,78 +1,78 @@
-# API de Gestión de Usuarios
+# User Management API
 
-Este proyecto es una API RESTful creada con **Node.js** y **Express** para gestionar usuarios en una base de datos MySQL. Está diseñada para realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar), proporcionando una manera eficiente y escalable de manipular datos de usuarios.
+This project is a RESTful API created with **Node.js** and **Express** to manage users in a MySQL database. It is designed to perform CRUD operations (Create, Read, Update, Delete), providing an efficient and scalable way to manipulate user data.
 
-## Descripción del Proyecto
+## Project Description
 
-La API se conecta a una base de datos MySQL, permitiendo almacenar y manipular la información de usuarios mediante un conjunto de endpoints organizados y seguros. Este sistema es ideal para aplicaciones web que requieren gestión de usuarios o administración de perfiles.
+The API connects to a MySQL database, allowing for the storage and management of user information through a set of organized and secure endpoints. This system is ideal for web applications that require user management or profile administration.
 
-### Características
+### Features
 
-- **CRUD Completo**: La API permite la creación, consulta, actualización y eliminación de registros de usuarios.
-- **Conexión con MySQL**: Usa MySQL como sistema de gestión de base de datos, manejando conexiones y consultas de forma eficiente.
-- **Modularidad**: Organizado en controladores y rutas, lo cual facilita la extensión y mantenimiento.
-- **Gestión de Errores**: Implementación de respuestas de error detalladas para mejorar la experiencia del usuario y ayudar en la depuración.
-- **Formato JSON**: Interacción con la API mediante datos en formato JSON, estandarizado y fácil de manejar.
+- **Full CRUD Operations**: The API allows for creating, reading, updating, and deleting user records.
+- **MySQL Integration**: Uses MySQL as the database management system, handling connections and queries efficiently.
+- **Modularity**: Organized into controllers and routes, which makes it easier to extend and maintain.
+- **Error Handling**: Detailed error responses to enhance user experience and assist in debugging.
+- **JSON Format**: Interaction with the API is done through standardized JSON format, making it easy to handle.
 
 ## Endpoints
 
-Cada operación que ofrece la API está documentada en los endpoints correspondientes:
+Each operation provided by the API is documented in the corresponding endpoints:
 
-### 1. Obtener todos los usuarios
-   - **Ruta**: `/users`
-   - **Método**: `GET`
-   - **Descripción**: Devuelve una lista de todos los usuarios registrados.
+### 1. Get All Users
+   - **Route**: `/users`
+   - **Method**: `GET`
+   - **Description**: Returns a list of all registered users.
 
-### 2. Obtener un usuario por ID
-   - **Ruta**: `/users/:id`
-   - **Método**: `GET`
-   - **Descripción**: Obtiene los datos de un usuario específico según el ID proporcionado en la ruta.
+### 2. Get User by ID
+   - **Route**: `/users/:id`
+   - **Method**: `GET`
+   - **Description**: Retrieves data for a specific user based on the provided ID.
 
-### 3. Crear un nuevo usuario
-   - **Ruta**: `/users`
-   - **Método**: `POST`
-   - **Descripción**: Permite agregar un nuevo usuario a la base de datos.
-   - **Datos de Entrada**:
+### 3. Create a New User
+   - **Route**: `/users`
+   - **Method**: `POST`
+   - **Description**: Adds a new user to the database.
+   - **Input Data**:
      ```json
      {
-       "name": "Nombre del usuario",
+       "name": "User's name",
        "edad": 25,
-       "profesion": "Profesión",
-       "curso": "Curso"
+       "profesion": "Profession",
+       "curso": "Course"
      }
      ```
 
-### 4. Actualizar un usuario
-   - **Ruta**: `/users/:id`
-   - **Método**: `PUT`
-   - **Descripción**: Actualiza la información de un usuario específico.
-   - **Datos de Entrada**:
+### 4. Update a User
+   - **Route**: `/users/:id`
+   - **Method**: `PUT`
+   - **Description**: Updates information for a specific user.
+   - **Input Data**:
      ```json
      {
-       "name": "Nuevo nombre",
+       "name": "New name",
        "edad": 26,
-       "profesion": "Nueva profesión",
-       "curso": "Nuevo curso"
+       "profesion": "New profession",
+       "curso": "New course"
      }
      ```
 
-### 5. Eliminar un usuario
-   - **Ruta**: `/users/:id`
-   - **Método**: `DELETE`
-   - **Descripción**: Elimina un usuario de la base de datos en función de su ID.
+### 5. Delete a User
+   - **Route**: `/users/:id`
+   - **Method**: `DELETE`
+   - **Description**: Deletes a user from the database based on their ID.
 
-## Estructura del Proyecto
+## Project Structure
 
-La estructura de archivos está organizada para lograr un código claro y mantenible:
+The file structure is organized to achieve clear and maintainable code:
 
 ```plaintext
-tu_repositorio/
+your_repository/
 ├── controllers/
-│   └── userController.js    # Controladores para manejar la lógica de cada endpoint
+│   └── userController.js    # Controllers to handle the logic of each endpoint
 ├── routes/
-│   └── apiRoutes.js         # Definición de las rutas de la API
-├── db.js                    # Configuración de la conexión a MySQL
-├── .env                     # Variables de entorno (configuración segura)
-├── .gitignore               # Archivos y carpetas a ignorar por Git
-├── package.json             # Dependencias y scripts de Node.js
-└── server.js                # Archivo principal que inicializa el servidor Express
+│   └── apiRoutes.js         # API route definitions
+├── db.js                    # MySQL connection configuration
+├── .env                     # Environment variables (secure configuration)
+├── .gitignore               # Files and folders ignored by Git
+├── package.json             # Node.js dependencies and scripts
+└── server.js                # Main file that initializes the Express server
